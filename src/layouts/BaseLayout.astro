@@ -1,0 +1,66 @@
+---
+/**
+ * 全ページ共通の骨格（<head> / 固定ヘッダー / 固定フッター）。
+ * もとの index.html / search.html / detail.html で重複していた部分をここに集約した。
+ *
+ * props:
+ *   title   … <title> の中身
+ *   pageCss … ページ固有 CSS の名前。"home" なら css/home.css を追加読み込み
+ *   scripts … </body> 直前に読み込む js/ 配下のファイル名（読み込み順どおりに渡す）
+ */
+interface Props {
+	title: string;
+	pageCss?: string;
+	scripts?: string[];
+}
+
+const { title, pageCss, scripts = [] } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<link rel="stylesheet" href="css/common.css" />
+		{pageCss && <link rel="stylesheet" href={`css/${pageCss}.css`} />}
+	</head>
+	<body>
+		<!-- ===== HEADER ===== -->
+		<header>
+			<div class="header-pink">
+				<div class="header-logo">
+					<a href="index.html"><img src="assets/image/logo_small.svg" alt="君に花束を贈るなら" /></a>
+				</div>
+			</div>
+			<div class="header-white">
+				<nav class="header-nav" aria-label="グローバルナビゲーション">
+					<ul>
+						<li><a href="#">おしらせ</a></li>
+						<li><a href="search.html">草花のページ</a></li>
+						<li><a href="#">樹木のページ</a></li>
+						<li><a href="#">お問い合わせ</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<!-- ===== MAIN ===== -->
+		<main>
+			<slot />
+		</main>
+
+		<!-- ===== FOOTER ===== -->
+		<footer>
+			<p class="footer-copyright">
+				&copy; 2025 君に花束を贈るなら. All rights reserved.
+			</p>
+		</footer>
+
+		{
+			/* 素のスクリプトを順番に読み込む（fetch / ES モジュール不使用。file:// でも動く） */
+			scripts.map((s) => <script is:inline src={`js/${s}`} />)
+		}
+	</body>
+</html>

@@ -1,0 +1,36 @@
+services:
+  # 開発サーバー: http://localhost:4321/BouquetForYou
+  astro:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "4321:4321"
+    environment:
+      - ASTRO_TELEMETRY_DISABLED=1
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+  # 本番ビルドの確認: docker compose run --rm build
+  build:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - ASTRO_TELEMETRY_DISABLED=1
+    command: sh -c "npm install && npm run build"
+    profiles: ["tools"]
+
+  # ビルド結果のプレビュー: http://localhost:4321/BouquetForYou
+  preview:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "4321:4321"
+    environment:
+      - ASTRO_TELEMETRY_DISABLED=1
+    command: sh -c "npm install && npm run preview -- --host 0.0.0.0"
+    profiles: ["tools"]

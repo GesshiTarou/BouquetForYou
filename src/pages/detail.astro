@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="君に花束を贈るなら｜草花の詳細"
+	pageCss="detail"
+	scripts={['flowers.js', 'detail.js']}
+>
+	<div class="main-content">
+		<div class="detail-card" id="detailCard">
+			<a class="detail-back" href="search.html">&larr; 草花のページへ戻る</a>
+			<div id="detailBody">
+				<p class="detail-loading">読み込み中…</p>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

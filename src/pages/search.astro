@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="君に花束を贈るなら｜草花をさがす"
+	pageCss="search"
+	scripts={['flowers.js', 'color.js', 'search.js']}
+>
+	<div class="main-content">
+		<!-- 操作パレット -->
+		<aside class="palette" id="palette">
+			<!-- 花の名前 / 品種 -->
+			<div class="palette-section">
+				<h3>花の名前 / 品種</h3>
+				<input type="text" class="palette-input" id="nameInput" placeholder="例: バラ" />
+			</div>
+
+			<!-- 花の色 -->
+			<div class="palette-section">
+				<h3>花の色</h3>
+				<div class="color-bar-wrapper" id="colorBarWrapper">
+					<div class="color-bar-track" id="colorBarTrack"></div>
+					<div class="color-bar-thumb" id="colorBarThumb"></div>
+				</div>
+				<div class="color-bar-active-dot" id="colorBarDot"></div>
+				<div class="color-bar-label" id="colorBarLabel">未選択</div>
+				<button class="color-bar-reset" id="colorBarReset">リセット</button>
+			</div>
+
+			<!-- 開花月 -->
+			<div class="palette-section">
+				<h3>開花月</h3>
+				<div class="month-grid" id="monthGrid"></div>
+			</div>
+
+			<!-- シーン -->
+			<div class="palette-section">
+				<h3>シーン</h3>
+				<div class="badge-group" id="sceneGroup"></div>
+			</div>
+
+			<!-- 栽培方法 -->
+			<div class="palette-section">
+				<h3>栽培方法</h3>
+				<div class="badge-group" id="cultivationGroup"></div>
+			</div>
+
+			<!-- 花言葉 -->
+			<div class="palette-section">
+				<h3>花言葉</h3>
+				<input type="text" class="palette-input" id="meaningInput" placeholder="例: 愛" />
+			</div>
+		</aside>
+
+		<!-- テーブル -->
+		<div class="table-area">
+			<table class="flower-table" id="flowerTable">
+				<thead>
+					<tr>
+						<th class="sortable" data-col="name">
+							名前<span class="sort-icon none" id="sort-name"></span>
+						</th>
+						<th class="sortable" data-col="variety">
+							品種<span class="sort-icon none" id="sort-variety"></span>
+						</th>
+						<th>色</th>
+						<th>栽培方法</th>
+						<th>開花月</th>
+						<th>シーン</th>
+						<th>花言葉</th>
+					</tr>
+				</thead>
+				<tbody id="flowerTableBody"></tbody>
+			</table>
+			<div class="no-results" id="noResults" style="display:none;">
+				該当する花が見つかりませんでした
+			</div>
+		</div>
+	</div>
+</BaseLayout>
