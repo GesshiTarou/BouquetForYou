@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>きみに花束を贈るなら</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <h1>きみに花束を贈るなら</h1>
+
+    <div class="color-picker-wrapper">
+        <div id="color-div"></div>
+        <canvas id="pin-canvas"></canvas>
+        <canvas id="color-canvas"></canvas>
+    </div>
+
+    <div class="filter-group">
+        <span class="filter-label">見かける時期</span>
+        <div id="month-buttons"></div>
+    </div>
+
+    <div class="filter-group">
+        <span class="filter-label">おすすめシーン</span>
+        <div id="scene-buttons"></div>
+    </div>
+
+    <div class="filter-group">
+        <span class="filter-label">花言葉の出典</span>
+        <div id="origin-buttons"></div>
+    </div>
+
+    <div class="table-container">
+        <table id="flower-table" class="display" style="width:100%"></table>
+    </div>
+
+    <!-- 素のスクリプトとして順番に読み込む（fetch / ES モジュール不使用。file:// でも動く） -->
+    <script src="data/flowers.js"></script>
+    <script src="js/flowerData.js"></script>
+    <script src="js/colorBar.js"></script>
+    <script src="js/flowerTable.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
