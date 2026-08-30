@@ -25,11 +25,9 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
-          # path: . / package-manager: npm は自動検出
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+          # path: . / package-manager: npm は自動検出。
+          # withastro/action が dist/ を github-pages アーティファクトとして
+          # アップロードするところまでやるので、別途 upload-pages-artifact は不要。
 
   deploy:
     needs: build
