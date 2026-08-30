@@ -1,0 +1,41 @@
+/* ===== トップページ (index.html) 固有スタイル ===== */
+
+main {
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 背景画像: PC/タブレットはエリア高さの90%、スマホはエリア幅の90% */
+.main-content-bg {
+  display: block;
+  height: 90%;
+  width: auto;
+  object-fit: contain;
+}
+
+.main-content-placeholder {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    min-height: 60vh;
+  }
+
+  .main-content-bg {
+    height: auto;
+    width: 90%;
+  }
+}

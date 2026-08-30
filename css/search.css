@@ -1,0 +1,361 @@
+/* ===== 検索ページ (search.html) 固有スタイル ===== */
+
+:root {
+  --color-palette-bg: #fdf4f4;
+  --color-palette-border: #edd5d5;
+
+  /* バッジの色 — 自由に調整可 */
+  --badge-scene-bg: #d6eaf5;
+  --badge-scene-text: #2e6b8a;
+  --badge-cultivation-bg: #f0ece2;
+  --badge-cultivation-text: #6b5e3a;
+}
+
+/* ===== MAIN ===== */
+.main-content {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+  padding: 24px 32px 32px;
+  min-height: 400px;
+  position: relative;
+}
+
+/* 背景の花のウォーターマーク */
+.main-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/image/background.png');
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== PALETTE ===== */
+.palette {
+  width: 240px;
+  min-width: 200px;
+  flex-shrink: 0;
+  background: var(--color-palette-bg);
+  border-radius: 12px;
+  padding: 20px 16px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--color-palette-border);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.palette-section h3 {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--color-nav-text);
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* テキスト入力 */
+.palette-input {
+  width: 100%;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  border: 1px solid var(--color-palette-border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.palette-input:focus {
+  border-color: #c8a0a0;
+}
+
+/* カラーバー */
+.color-bar-wrapper {
+  position: relative;
+  height: 20px;
+  border-radius: 10px;
+  overflow: visible;
+  cursor: pointer;
+  user-select: none;
+}
+
+.color-bar-track {
+  width: 100%;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 3px;
+  background: linear-gradient(to right,
+    hsl(0, 50%, 72%),
+    hsl(30, 50%, 72%),
+    hsl(60, 50%, 72%),
+    hsl(90, 50%, 72%),
+    hsl(120, 50%, 72%),
+    hsl(150, 50%, 72%),
+    hsl(180, 50%, 72%),
+    hsl(210, 50%, 72%),
+    hsl(240, 50%, 72%),
+    hsl(270, 50%, 72%),
+    hsl(300, 50%, 72%),
+    hsl(330, 50%, 72%),
+    hsl(360, 50%, 72%)
+  );
+}
+
+.color-bar-thumb {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #b08080;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: border-color 0.2s;
+}
+
+.color-bar-active-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 4px auto 0;
+}
+
+.color-bar-label {
+  font-size: 0.72rem;
+  color: var(--color-nav-text);
+  text-align: center;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+.color-bar-reset {
+  display: block;
+  margin: 4px auto 0;
+  font-size: 0.7rem;
+  color: #b08080;
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  font-family: inherit;
+  padding: 0;
+}
+
+.color-bar-reset:hover {
+  text-decoration: underline;
+}
+
+/* 開花月ボタン */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+
+.month-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  background: #e8d8d8;
+  color: var(--color-nav-text);
+  font-size: 0.68rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0;
+}
+
+.month-btn.active {
+  background: #c08080;
+  color: #fff;
+}
+
+/* シーン / 栽培方法のトグルバッジ */
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge-toggle {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: none;
+  font-family: inherit;
+  font-size: 0.74rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.18s, filter 0.18s;
+  opacity: 0.55;
+  filter: grayscale(0.3);
+}
+
+.badge-toggle.scene {
+  background: var(--badge-scene-bg);
+  color: var(--badge-scene-text);
+}
+
+.badge-toggle.cultivation {
+  background: var(--badge-cultivation-bg);
+  color: var(--badge-cultivation-text);
+}
+
+.badge-toggle.active {
+  opacity: 1;
+  filter: none;
+}
+
+/* ===== TABLE AREA ===== */
+.table-area {
+  flex: 1;
+  padding-left: 24px;
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+}
+
+.flower-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.flower-table thead tr {
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.flower-table th {
+  padding: 10px 12px;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--color-nav-text);
+  letter-spacing: 0.08em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.flower-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.18s;
+}
+
+.flower-table th.sortable:hover {
+  color: var(--color-nav-hover);
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.65rem;
+  vertical-align: middle;
+  opacity: 0.5;
+}
+
+.sort-icon.asc::after { content: '▲'; }
+.sort-icon.desc::after { content: '▼'; }
+.sort-icon.none::after { content: '⇅'; }
+
+.flower-table tbody tr {
+  border-bottom: 1px solid #f0e0e0;
+  transition: background 0.15s;
+}
+
+.flower-table tbody tr:hover {
+  background: #fdf6f6;
+}
+
+.flower-table td {
+  padding: 12px 12px;
+  vertical-align: middle;
+}
+
+/* 色ドット */
+.color-dots {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.color-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* テーブル内のシーン / 栽培方法バッジ */
+.badge {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  margin: 2px 2px 2px 0;
+}
+
+.badge.scene {
+  background: var(--badge-scene-bg);
+  color: var(--badge-scene-text);
+}
+
+.badge.cultivation {
+  background: var(--badge-cultivation-bg);
+  color: var(--badge-cultivation-text);
+}
+
+/* 花言葉 */
+.meaning-cell {
+  font-style: italic;
+  color: #7a5a5a;
+  font-size: 0.82rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-nav-text);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 767px) {
+  .main-content {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .palette {
+    width: 100%;
+  }
+
+  .table-area {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .palette {
+    width: 200px;
+  }
+}

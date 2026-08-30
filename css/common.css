@@ -1,0 +1,184 @@
+/* ===== 共通スタイル（ヘッダー / フッター / 変数 / リセット） =====
+   index.html と search.html の両方で読み込む。 */
+
+:root {
+  --color-header-bg: #fce8e8;
+  --color-page-bg: #ffffff;
+  --color-footer-bg: #fce8e8;
+  --color-border: #e0b0b0;
+  --color-text: #4a3a3a;
+  --color-nav-text: #6a5a5a;
+  --color-nav-hover: #c06060;
+
+  /* PC/タブレット: ピンク領域120px + 白領域100px = 計220px */
+  --header-pink-height-pc: 120px;
+  --header-white-height-pc: 100px;
+  --header-total-height-pc: 220px;
+
+  /* PC/タブレット ロゴ: 高さ200px・幅400px、縦中心 = ピンク/白の境界線 */
+  --logo-height-pc: 200px;
+  --logo-width-pc: 400px;
+
+  /* スマホ: ピンク領域50px + 白領域40px = 計90px */
+  --header-pink-height-sp: 50px;
+  --header-white-height-sp: 40px;
+  --header-total-height-sp: 90px;
+
+  /* スマホ ロゴ: 高さ80px・幅160px、縦中心 = ピンク/白の境界線 */
+  --logo-height-sp: 80px;
+  --logo-width-sp: 160px;
+
+  --footer-height: 40px;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', '游明朝', 'HG明朝E', serif;
+  background-color: var(--color-page-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER (PC/タブレット) =====
+   .header-pink  … ピンク領域 (120px)  ← ページ最上部
+   .header-white … 白領域    (100px)  ← その下
+   ロゴ(高さ200px)はピンク/白境界線を縦中心に跨いで配置 (top = 120 - 200/2 = 20px) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.header-pink {
+  width: 100%;
+  height: var(--header-pink-height-pc);
+  background-color: var(--color-header-bg);
+  position: relative; /* ロゴの絶対配置の基点 */
+}
+
+.header-white {
+  width: 100%;
+  height: var(--header-white-height-pc);
+  background-color: var(--color-page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 32px;
+}
+
+.header-logo {
+  position: absolute;
+  left: 24px;
+  top: calc(var(--header-pink-height-pc) - var(--logo-height-pc) / 2);
+  z-index: 10;
+}
+
+.header-logo img {
+  height: var(--logo-height-pc);
+  width: var(--logo-width-pc);
+  object-fit: contain;
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--color-nav-text);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+  color: var(--color-nav-hover);
+}
+
+/* ===== MAIN（共通の骨格。ページ固有は home.css / search.css） ===== */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  width: 100%;
+  background-color: var(--color-footer-bg);
+  min-height: var(--footer-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+}
+
+.footer-copyright {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--color-nav-text);
+}
+
+/* ===== RESPONSIVE: スマートフォン =====
+   ロゴ(高さ80px)はピンク/白境界線を縦中心に跨いで配置 (top = 50 - 80/2 = 10px) */
+@media (max-width: 767px) {
+  .header-pink {
+    height: var(--header-pink-height-sp);
+    background-color: var(--color-header-bg);
+    position: relative;
+  }
+
+  .header-white {
+    display: flex;
+    height: var(--header-white-height-sp);
+    background-color: var(--color-page-bg);
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+  }
+
+  .header-logo {
+    position: absolute;
+    left: 16px;
+    top: calc(var(--header-pink-height-sp) - var(--logo-height-sp) / 2);
+  }
+
+  .header-logo img {
+    height: var(--logo-height-sp);
+    width: var(--logo-width-sp);
+  }
+
+  /* スマホではナビを非表示（ハンバーガーメニューに切替可能） */
+  .header-nav {
+    display: none;
+  }
+}
+
+/* ===== RESPONSIVE: タブレット ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  nav ul {
+    gap: 24px;
+  }
+
+  nav ul li a {
+    font-size: 0.8rem;
+  }
+}
