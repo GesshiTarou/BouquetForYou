@@ -124,7 +124,7 @@
     els.tbody.innerHTML = data
       .map(
         (f) => `
-    <tr>
+    <tr class="flower-row" data-id="${f.id}" tabindex="0" role="link" aria-label="${f.name} の詳細を表示">
       <td>${f.name}</td>
       <td>${f.variety || '—'}</td>
       <td>
@@ -158,6 +158,29 @@
     ['name', 'variety'].forEach((col) => {
       const el = document.getElementById(`sort-${col}`);
       el.className = col === sortCol ? `sort-icon ${sortDir}` : 'sort-icon none';
+    });
+  }
+
+  /* =============================================
+     行クリック → 詳細ページ (detail.html) へ遷移
+     ============================================= */
+  function goToDetail(id) {
+    if (id == null) return;
+    window.location.href = 'detail.html?id=' + encodeURIComponent(id);
+  }
+
+  function setupRowNavigation() {
+    els.tbody.addEventListener('click', (e) => {
+      const tr = e.target.closest('tr.flower-row');
+      if (tr) goToDetail(tr.dataset.id);
+    });
+    els.tbody.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const tr = e.target.closest('tr.flower-row');
+      if (tr) {
+        e.preventDefault();
+        goToDetail(tr.dataset.id);
+      }
     });
   }
 
@@ -373,6 +396,7 @@
       return;
     }
 
+    setupRowNavigation();
     setupSortHeaders();
     setupColorBar();
     setupMonthButtons();
