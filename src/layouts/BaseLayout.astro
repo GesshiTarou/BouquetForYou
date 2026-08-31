@@ -15,6 +15,9 @@ interface Props {
 }
 
 const { title, pageCss, scripts = [] } = Astro.props;
+
+// アイコンは astro-icon（Lucide セット）。<Icon name="lucide:xxx" /> で使う。
+import { Icon } from 'astro-icon/components';
 ---
 
 <!doctype html>
@@ -37,10 +40,10 @@ const { title, pageCss, scripts = [] } = Astro.props;
 			<div class="header-white">
 				<nav class="header-nav" aria-label="グローバルナビゲーション">
 					<ul>
-						<li><a href="#">おしらせ</a></li>
-						<li><a href="search.html">草花のページ</a></li>
-						<li><a href="#">樹木のページ</a></li>
-						<li><a href="#">お問い合わせ</a></li>
+						<li><a href="#"><Icon name="lucide:bell" /> おしらせ</a></li>
+						<li><a href="search.html"><Icon name="lucide:flower-2" /> 草花のページ</a></li>
+						<li><a href="#"><Icon name="lucide:trees" /> 樹木のページ</a></li>
+						<li><a href="#"><Icon name="lucide:mail" /> お問い合わせ</a></li>
 					</ul>
 				</nav>
 			</div>

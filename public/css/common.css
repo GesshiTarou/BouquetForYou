@@ -114,6 +114,15 @@ nav ul li a {
   letter-spacing: 0.08em;
   white-space: nowrap;
   transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* astro-icon が出力する SVG。文字サイズに合わせる */
+nav ul li a svg {
+  width: 1.15em;
+  height: 1.15em;
 }
 
 nav ul li a:hover {

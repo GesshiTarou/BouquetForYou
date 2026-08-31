@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
 <BaseLayout
@@ -12,13 +13,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		<aside class="palette" id="palette">
 			<!-- 花の名前 / 品種 -->
 			<div class="palette-section">
-				<h3>花の名前 / 品種</h3>
+				<h3><Icon name="lucide:tag" />花の名前 / 品種</h3>
 				<input type="text" class="palette-input" id="nameInput" placeholder="例: バラ" />
 			</div>
 
 			<!-- 花の色 -->
 			<div class="palette-section">
-				<h3>花の色</h3>
+				<h3><Icon name="lucide:palette" />花の色</h3>
 				<div class="color-bar-wrapper" id="colorBarWrapper">
 					<div class="color-bar-track" id="colorBarTrack"></div>
 					<div class="color-bar-thumb" id="colorBarThumb"></div>
@@ -30,25 +31,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 			<!-- 開花月 -->
 			<div class="palette-section">
-				<h3>開花月</h3>
+				<h3><Icon name="lucide:calendar-days" />開花月</h3>
 				<div class="month-grid" id="monthGrid"></div>
 			</div>
 
 			<!-- シーン -->
 			<div class="palette-section">
-				<h3>シーン</h3>
+				<h3><Icon name="lucide:gift" />シーン</h3>
 				<div class="badge-group" id="sceneGroup"></div>
 			</div>
 
 			<!-- 栽培方法 -->
 			<div class="palette-section">
-				<h3>栽培方法</h3>
+				<h3><Icon name="lucide:sprout" />栽培方法</h3>
 				<div class="badge-group" id="cultivationGroup"></div>
 			</div>
 
 			<!-- 花言葉 -->
 			<div class="palette-section">
-				<h3>花言葉</h3>
+				<h3><Icon name="lucide:sparkles" />花言葉</h3>
 				<input type="text" class="palette-input" id="meaningInput" placeholder="例: 愛" />
 			</div>
 		</aside>

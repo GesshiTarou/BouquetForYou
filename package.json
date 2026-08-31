@@ -12,7 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.2.9"
+    "@iconify-json/lucide": "^1.2.128",
+    "astro": "^7.2.9",
+    "astro-icon": "^1.2.0"
   },
   "allowScripts": {
     "esbuild": true

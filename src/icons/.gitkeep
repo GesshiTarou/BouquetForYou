@@ -1,0 +1,2 @@
+# 自前の SVG アイコンを置く場所（astro-icon がここを走査する）。
+# ファイル名が名前になる: src/icons/logo.svg → <Icon name="logo" />
