@@ -265,6 +265,61 @@
   transition: color 0.18s;
 }
 
+/* ヘッダー内の絞り込み（シーン / 栽培方法） */
+.flower-table th.filter-col {
+  position: relative;
+}
+
+.th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.th-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.45;
+  border-radius: 4px;
+  transition: opacity 0.18s, color 0.18s, background 0.18s;
+}
+
+.th-filter-btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.th-filter-btn:hover {
+  opacity: 0.8;
+}
+
+.th-filter-btn.active {
+  opacity: 1;
+  color: #b06a6a;
+  background: #f6e6e6;
+}
+
+.th-filter-popover {
+  position: fixed;
+  z-index: 50;
+  max-width: 260px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--color-palette-border);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+}
+
+.th-filter-popover[hidden] {
+  display: none;
+}
+
 .flower-table th.sortable:hover {
   color: var(--color-nav-hover);
 }

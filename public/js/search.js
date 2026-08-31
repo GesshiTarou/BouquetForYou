@@ -337,10 +337,58 @@
           filterSet.add(item);
           btn.classList.add('active');
         }
+        updateFilterBtnStates();
         renderTable();
       });
       container.appendChild(btn);
     });
+  }
+
+  /* =============================================
+     ヘッダー内の絞り込みポップオーバー
+     ============================================= */
+  function updateFilterBtnStates() {
+    els.sceneFilterBtn.classList.toggle('active', filters.scenes.size > 0);
+    els.cultivationFilterBtn.classList.toggle(
+      'active',
+      filters.cultivation.size > 0,
+    );
+  }
+
+  function closeAllPopovers() {
+    [
+      [els.sceneFilterBtn, els.sceneGroup],
+      [els.cultivationFilterBtn, els.cultivationGroup],
+    ].forEach(([btn, pop]) => {
+      pop.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function setupHeaderFilters() {
+    [
+      [els.sceneFilterBtn, els.sceneGroup],
+      [els.cultivationFilterBtn, els.cultivationGroup],
+    ].forEach(([btn, pop]) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasOpen = !pop.hidden;
+        closeAllPopovers();
+        if (!wasOpen) {
+          const r = btn.getBoundingClientRect();
+          pop.style.top = r.bottom + 4 + 'px';
+          pop.style.left =
+            Math.min(r.left, window.innerWidth - 272) + 'px';
+          pop.hidden = false;
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      pop.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    document.addEventListener('click', closeAllPopovers);
+    window.addEventListener('scroll', closeAllPopovers, true);
+    window.addEventListener('resize', closeAllPopovers);
   }
 
   function setupBadgeFilters() {
@@ -382,6 +430,8 @@
       monthGrid: document.getElementById('monthGrid'),
       sceneGroup: document.getElementById('sceneGroup'),
       cultivationGroup: document.getElementById('cultivationGroup'),
+      sceneFilterBtn: document.getElementById('sceneFilterBtn'),
+      cultivationFilterBtn: document.getElementById('cultivationFilterBtn'),
       nameInput: document.getElementById('nameInput'),
       meaningInput: document.getElementById('meaningInput'),
     };
@@ -401,6 +451,7 @@
     setupColorBar();
     setupMonthButtons();
     setupBadgeFilters();
+    setupHeaderFilters();
     setupTextInputs();
     renderTable();
   }

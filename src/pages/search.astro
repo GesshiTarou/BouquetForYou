@@ -35,18 +35,6 @@ import { Icon } from 'astro-icon/components';
 				<div class="month-grid" id="monthGrid"></div>
 			</div>
 
-			<!-- シーン -->
-			<div class="palette-section">
-				<h3><Icon name="lucide:gift" />シーン</h3>
-				<div class="badge-group" id="sceneGroup"></div>
-			</div>
-
-			<!-- 栽培方法 -->
-			<div class="palette-section">
-				<h3><Icon name="lucide:sprout" />栽培方法</h3>
-				<div class="badge-group" id="cultivationGroup"></div>
-			</div>
-
 			<!-- 花言葉 -->
 			<div class="palette-section">
 				<h3><Icon name="lucide:sparkles" />花言葉</h3>
@@ -66,9 +54,39 @@ import { Icon } from 'astro-icon/components';
 							品種<span class="sort-icon none" id="sort-variety"></span>
 						</th>
 						<th>色</th>
-						<th>栽培方法</th>
+						<th class="filter-col">
+							<span class="th-inner">
+								栽培方法
+								<button
+									type="button"
+									class="th-filter-btn"
+									id="cultivationFilterBtn"
+									aria-label="栽培方法で絞り込み"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									<Icon name="lucide:sprout" />
+								</button>
+							</span>
+							<div class="th-filter-popover badge-group" id="cultivationGroup" hidden></div>
+						</th>
 						<th>開花月</th>
-						<th>シーン</th>
+						<th class="filter-col">
+							<span class="th-inner">
+								シーン
+								<button
+									type="button"
+									class="th-filter-btn"
+									id="sceneFilterBtn"
+									aria-label="シーンで絞り込み"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									<Icon name="lucide:gift" />
+								</button>
+							</span>
+							<div class="th-filter-popover badge-group" id="sceneGroup" hidden></div>
+						</th>
 						<th>花言葉</th>
 					</tr>
 				</thead>
