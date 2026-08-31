@@ -11,17 +11,18 @@
   --badge-cultivation-text: #6b5e3a;
 }
 
-/* ===== MAIN ===== */
+/* ===== MAIN =====
+   コンテンツエリアを「サイドメニュー | テーブル」の 2 カラムに分割。
+   親はヘッダー / フッターを除いた表示領域の高さに固定し、
+   各カラムが独立してスクロールする（サイドメニューは位置が固定）。 */
 .main-content {
-  flex: 1;
-  display: flex;
-  gap: 0;
-  align-items: flex-start;
+  flex: none;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
   padding: 24px 32px 32px;
-  min-height: 400px;
   position: relative;
-  /* ヘッダー / フッターを除いた表示領域の高さに固定し、
-     サイドメニューとテーブルをそれぞれ独立してスクロールさせる */
   height: calc(100vh - var(--header-offset) - var(--footer-height));
   overflow: hidden;
 }
@@ -40,11 +41,8 @@
   z-index: 0;
 }
 
-/* ===== PALETTE ===== */
+/* ===== PALETTE（左カラム・位置固定） ===== */
 .palette {
-  width: 240px;
-  min-width: 200px;
-  flex-shrink: 0;
   background: var(--color-palette-bg);
   border-radius: 12px;
   padding: 20px 16px;
@@ -54,7 +52,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* 位置を固定し、内容がはみ出す場合のみ独立スクロール */
+  /* カラム内で完結してスクロール（内容がはみ出す場合のみ） */
+  align-self: stretch;
+  min-height: 0;
   max-height: 100%;
   overflow-y: auto;
 }
@@ -237,14 +237,15 @@
   filter: none;
 }
 
-/* ===== TABLE AREA ===== */
+/* ===== TABLE AREA（右カラム・独立スクロール） ===== */
 .table-area {
-  flex: 1;
-  padding-left: 24px;
   position: relative;
   z-index: 1;
+  align-self: stretch;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
   /* サイドメニューとは独立して縦横スクロール */
-  max-height: 100%;
   overflow: auto;
 }
 
@@ -429,30 +430,35 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 767px) {
+  /* スマホでは 1 カラムに戻し、ページ全体で普通にスクロール */
   .main-content {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 20px;
     padding: 16px;
-    /* スマホでは独立スクロールをやめ、ページ全体で普通にスクロール */
     height: auto;
     overflow: visible;
   }
 
   .palette {
-    width: 100%;
+    align-self: auto;
     max-height: none;
     overflow-y: visible;
   }
 
   .table-area {
-    padding-left: 0;
-    padding-top: 20px;
-    max-height: none;
-    overflow: visible;
+    align-self: auto;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .flower-table th {
+    position: static;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .palette {
-    width: 200px;
+  .main-content {
+    grid-template-columns: 200px minmax(0, 1fr);
   }
 }
