@@ -20,6 +20,10 @@
   padding: 24px 32px 32px;
   min-height: 400px;
   position: relative;
+  /* ヘッダー / フッターを除いた表示領域の高さに固定し、
+     サイドメニューとテーブルをそれぞれ独立してスクロールさせる */
+  height: calc(100vh - var(--header-offset) - var(--footer-height));
+  overflow: hidden;
 }
 
 /* 背景の花のウォーターマーク */
@@ -50,6 +54,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* 位置を固定し、内容がはみ出す場合のみ独立スクロール */
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .palette-section h3 {
@@ -236,7 +243,9 @@
   padding-left: 24px;
   position: relative;
   z-index: 1;
-  overflow-x: auto;
+  /* サイドメニューとは独立して縦横スクロール */
+  max-height: 100%;
+  overflow: auto;
 }
 
 .flower-table {
@@ -257,6 +266,12 @@
   letter-spacing: 0.08em;
   text-align: left;
   white-space: nowrap;
+  /* テーブルスクロール時も見出しを固定表示 */
+  position: sticky;
+  top: 0;
+  background: var(--color-page-bg);
+  box-shadow: inset 0 -1.5px 0 var(--color-border);
+  z-index: 2;
 }
 
 .flower-table th.sortable {
@@ -417,15 +432,22 @@
   .main-content {
     flex-direction: column;
     padding: 16px;
+    /* スマホでは独立スクロールをやめ、ページ全体で普通にスクロール */
+    height: auto;
+    overflow: visible;
   }
 
   .palette {
     width: 100%;
+    max-height: none;
+    overflow-y: visible;
   }
 
   .table-area {
     padding-left: 0;
     padding-top: 20px;
+    max-height: none;
+    overflow: visible;
   }
 }
 
